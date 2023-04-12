@@ -1,8 +1,10 @@
 ---
 title: "hw9"
-output: html_document
-authors: Blake Underwood, Emiliano, and Pramit
+output:
+  word_document: default
+  html_document: default
 date: "2023-04-12"
+authors: Blake Underwood, Emiliano, and Pramit
 ---
 
 ```{r}
@@ -10,7 +12,24 @@ av <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/av
 View(av)
 ```
 
+## Pramit
+#### There’s a 2-in-3 chance that a member of the Avengers returned from their first stint in the afterlife, but only a 50 percent chance they recovered from a second or third death.
+```{r}
+# chance of returning after first death
+yes_count <- table(av$Return1)["YES"]
+no_count <- table(av$Return1)["NO"]
+first_death_return_rate = yes_count / (yes_count + no_count)
+first_death_return_rate
+
+# chance of returning after second death
+yes_count <- table(av$Return2)["YES"]
+no_count <- table(av$Return2)["NO"]
+second_death_return_rate = yes_count / (yes_count + no_count)
+second_death_return_rate
+```
+
 ## Blake
+#### on 57 occasions the individual made a comeback.
 ```{r}
 # total number of times avengers have returned
 times_avengers_returned <-sum(av$Return1 == "YES") + 
@@ -32,6 +51,7 @@ View(av)
 ```
 
 ## Emiliano
+#### The MVP of the Earth-616 Marvel Universe Avengers has to be Jocasta — an android based on Janet van Dyne and built by Ultron — who has been destroyed five times and then recovered five times.
 ```{r}
 # number of times Jocasta has died
 av %>%
@@ -40,6 +60,7 @@ av %>%
 ```
 
 ## Blake
+#### I counted 89 total deaths — some unlucky Avengers.
 ```{r}
 # total amount of avenger deaths
 time_sum <- sum(av$time)
@@ -47,5 +68,4 @@ time_sum <- sum(av$time)
 time_sum
 times_avengers_returned
 ```
-
 
