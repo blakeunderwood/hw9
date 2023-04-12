@@ -1,0 +1,50 @@
+---
+title: "hw9"
+output: html_document
+authors: Blake Underwood, Emiliano, and Pramit
+date: "2023-04-12"
+---
+
+```{r}
+av <- read.csv("https://raw.githubusercontent.com/fivethirtyeight/data/master/avengers/avengers.csv", stringsAsFactors = FALSE)
+View(av)
+```
+
+## Blake
+```{r}
+# total number of times avengers have returned
+times_avengers_returned <-sum(av$Return1 == "YES") + 
+                   sum(av$Return2 == "YES") +
+                   sum(av$Return3 == "YES") +
+                   sum(av$Return4 == "YES") +
+                   sum(av$Return5 == "YES")
+```
+
+```{r}
+library(dplyr)
+
+av <- av %>%
+  mutate(time = rowSums(across(starts_with("Death"), ~ ifelse(.x == "YES", 1, 0))),
+         death = ifelse(time > 0, "YES", "No")) %>%
+  select(-c(Death1, Death2, Death3, Death4, Death5, Return1, Return2, Return3, Return4, Return5))
+
+View(av)
+```
+
+## Emiliano
+```{r}
+# number of times Jocasta has died
+av %>%
+  filter(Name.Alias == "Jocasta") %>%
+  select(time)
+```
+
+## Blake
+```{r}
+# total amount of avenger deaths
+time_sum <- sum(av$time)
+
+time_sum
+times_avengers_returned
+```
+
